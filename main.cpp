@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <windows.h>
 #include <exception>
 #include <stdexcept>
 #include <boost/filesystem.hpp>
@@ -42,7 +43,6 @@ int main( int argc, char** argv )
         std::cout << "Please start LYNE or unminimize it";
         return 1;
     }
-#endif
 
     Operation op;
     std::string execGenOpt;
@@ -79,11 +79,7 @@ int main( int argc, char** argv )
     std::cin >> start;
     std::cin.get();
 
-#ifdef _WIN32
     auto res = getResolution(hwnd);
-#else
-    auto res = std::pair <int, int> {};
-#endif
 
     std::vector <NodeMatrix> matrices;
 
@@ -94,16 +90,13 @@ int main( int argc, char** argv )
             for (int i = 0; i != 3; ++i)
             {
                 std::cout << "Sleeping... " << i+1 << "\n";
-#ifdef _WIN32
                 Sleep(500);
-#endif
             }
         }
-        //clrscr();
+        clrscr();
 
         switch (op)
         {
-#ifdef _WIN32
             case (Operation::ExecuteSet):
             {
                 std::vector <NodePath> paths;
@@ -125,9 +118,7 @@ int main( int argc, char** argv )
                     std::cout << "\nFound solution - Press button to continue";
                     std::cin.get();
                 }
-
                 DrawAllPaths(hwnd, paths, 70);
-
                 break;
             }
             case (Operation::GenerateSet):
@@ -220,8 +211,8 @@ int main( int argc, char** argv )
                 catch (...)
                 {
                 }
+                break;
             }
-#endif
             case (Operation::SolveShots):
             {
                 std::cout << "[SOLVE_SHOTS] " << counter << ": " << Grid[counter - 1][1] << " - " << Grid[counter - 1][0] << "\n";
@@ -240,16 +231,9 @@ int main( int argc, char** argv )
                     }
                     reader.close();
 
-                    std::cout << "ctor...\n";
                     LYNEGenerator gen(fname);
-
-                    std::cout << "generate...\n";
                     auto LYNEMatrix = gen.generate();
-
-                    std::cout << "save_proc...\n";
                     gen.saveProcessed(std::string{"img_processed_"} + std::to_string(counter) + ".png");
-
-                    std::cout << "mtrx_pb...\n";
                     matrices.push_back(LYNEMatrix);
                 }
                 catch (...)
@@ -280,6 +264,9 @@ int main( int argc, char** argv )
             dumpPaths (filePath, paths, res, stepCounter, backtrackCounter);
         }
     }
+#else
+
+#endif
 
     return 0;
 }
