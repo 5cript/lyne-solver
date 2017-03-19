@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#if _WIN32
+
 void DrawAllPaths(HWND window, std::vector <NodePath> const& paths, int delay, WindowBorder border)
 {
     RECT rect;
@@ -71,3 +73,5 @@ void ClickRelative (HWND window, std::pair <double, double> relative, int clickD
     auto h = rect.bottom - rect.top - wb.titleBarHeight - wb.barWidth;
     ClickOnce (window, {(int)(relative.first * (double)w), (int)(relative.second * (double)h)}, clickDelay);
 }
+
+#endif

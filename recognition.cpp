@@ -211,5 +211,5 @@ void detectShapes(cv::Mat const& src, cv::Mat& dst, std::vector <Shape>& shapes,
 	}
 
 	//cv::imshow("dst", dst);
-	cv::waitKey(0);
+	//cv::waitKey(0);
 }

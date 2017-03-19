@@ -2,8 +2,12 @@
 #define MAGIC_MOUSE_H_INCLUDED
 
 #include "path.h"
-#include <windows.h>
 
+#if _WIN32
+#   include <windows.h>
+#endif
+
+#if _WIN32
 struct WindowBorder
 {
     int titleBarHeight = 26;
@@ -14,6 +18,7 @@ void DrawAllPaths (HWND window, std::vector <NodePath> const& paths, int delay =
 void ClickOnce (HWND window, cv::Point pos, int clickDelay = 50);
 void ClickRelative (HWND window, std::pair <double, double> relative, int clickDelay = 50);
 
+#endif
 constexpr static int Grid[][2] = {
     {0, 0},
     {1, 0}, {1, 1}, {1, 2}, {1, 3},
