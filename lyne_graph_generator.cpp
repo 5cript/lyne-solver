@@ -26,16 +26,19 @@ LYNEGenerator::LYNEGenerator()
     original_ = capture_window(hwnd);
     cv::imwrite("./captured.png", original_);
 
-    if( !original_.data )
+    if(!original_.data)
         throw std::runtime_error("Could not find LYNE window or render it");
 #endif
 
     crop(original_);
 }
 
-LYNEGenerator::LYNEGenerator(std::istream input)
+LYNEGenerator::LYNEGenerator(std::string const& inputFile)
 {
+    original_ = cv::imread(inputFile, 8);
 
+    if(!original_.data)
+        throw std::runtime_error("Could not read image");
 }
 
 void LYNEGenerator::showProcessed()
@@ -48,9 +51,14 @@ void LYNEGenerator::showOriginal()
     cv::imshow("Original Image", original_);
 }
 
-void LYNEGenerator::saveProcessed()
+void LYNEGenerator::saveProcessed(std::string const& name)
 {
-    cv::imwrite("./processed.png", processed_);
+    cv::imwrite(name.c_str(), processed_);
+}
+
+void LYNEGenerator::saveCropped(std::string const& name)
+{
+    cv::imwrite(name.c_str(), original_);
 }
 
 void LYNEGenerator::createGrid(std::vector <Node>& nodes, std::vector <int>& xGrid, std::vector <int>& yGrid)

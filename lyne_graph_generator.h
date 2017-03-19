@@ -10,10 +10,11 @@ class LYNEGenerator
 {
 public:
     LYNEGenerator();
-    LYNEGenerator(std::istream input);
+    LYNEGenerator(std::string const& inputFile);
     void showProcessed();
     void showOriginal();
-    void saveProcessed();
+    void saveProcessed(std::string const& name = "./processed.png");
+    void saveCropped(std::string const& name);
     NodeMatrix generate();
     void solve();
     cv::Mat getOriginal() const; // const is a lie

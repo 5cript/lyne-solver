@@ -24,8 +24,10 @@ namespace fs = boost::filesystem;
 enum class Operation
 {
     ExecuteSet = 1,
-    GenerateSet = 2,
-    SolveAllOnly = 3
+    GenerateSet,
+    SolveAllOnly,
+    CreateShots,
+    SolveShots
 };
 
 bool loadSolution (fs::path where, std::vector <NodePath>& paths, std::pair <int, int>& resolution);
@@ -48,6 +50,8 @@ int main( int argc, char** argv )
     std::cout << "1: Execute Set\n";
     std::cout << "2: Generate Set\n";
     std::cout << "3: Solve All Only\n";
+    std::cout << "4: Make Screenshots\n";
+    std::cout << "5: Solve Screenshots\n";
 
     std::getline (std::cin, execGenOpt);
     op = (Operation)std::stoi(execGenOpt);
@@ -55,7 +59,7 @@ int main( int argc, char** argv )
     clrscr();
 
     bool wait = false;
-    if (op != Operation::SolveAllOnly)
+    if (op != Operation::SolveAllOnly && op != Operation::CreateShots && op != Operation::SolveShots)
     {
         std::cout << "Wait for ok? (Don't solve it straight away and steal the mouse): ";
         std::string waitStr;
@@ -81,12 +85,12 @@ int main( int argc, char** argv )
 
     for (int counter = start; counter <= 25; ++counter)
     {
-        if (op != Operation::SolveAllOnly)
+        if (op != Operation::SolveAllOnly && op != Operation::SolveShots)
         {
             for (int i = 0; i != 3; ++i)
             {
                 std::cout << "Sleeping... " << i+1 << "\n";
-                Sleep(1000);
+                Sleep(500);
             }
         }
         clrscr();
@@ -184,10 +188,65 @@ int main( int argc, char** argv )
 
                 break;
             }
+            case (Operation::CreateShots):
+            {
+                LYNEGenerator gen;
+                auto NumberGrid = gen.generate();
+                auto node = NumberGrid.get({Grid[counter - 1][1], Grid[counter - 1][0]});
+
+                std::cout << "[CREATE_SHOTS] " << counter << ": " << Grid[counter - 1][1] << " - " << Grid[counter - 1][0] << "\n";
+
+                ClickOnce(hwnd, node.position);
+                Sleep(1600);
+
+                try
+                {
+                    LYNEGenerator gen;
+                    gen.saveCropped(std::string{"img_"} + std::to_string(counter) + ".png");
+                    ClickRelative(hwnd, {0.945, 0.026}); // measured
+                    Sleep(1200);
+                    ClickRelative(hwnd, {0.500, 0.666}); // measured
+                    Sleep(1200);
+                }
+                catch (...)
+                {
+                }
+            }
+            case (Operation::SolveShots):
+            {
+                std::cout << "[SOLVE_SHOTS] " << counter << ": " << Grid[counter - 1][1] << " - " << Grid[counter - 1][0] << "\n";
+
+                try
+                {
+                    auto fname = std::string{"img_"} + std::to_string(counter) + ".png";
+
+                    std::ifstream reader(fname, std::ios_base::binary);
+                    if (!reader.good())
+                    {
+                        std::vector <std::vector <Node>> dum;
+                        matrices.emplace_back(dum);
+                        std::cout << fname << " not found\n";
+                        continue;
+                    }
+                    reader.close();
+
+                    LYNEGenerator gen(fname);
+                    auto LYNEMatrix = gen.generate();
+                    gen.saveProcessed(std::string{"img_processed_"} + std::to_string(counter) + ".png");
+                    matrices.push_back(LYNEMatrix);
+                }
+                catch (...)
+                {
+                    std::vector <std::vector <Node>> dum;
+                    matrices.emplace_back(dum);
+                }
+
+                break;
+            }
         }
     }
 
-    if (op == Operation::SolveAllOnly)
+    if (op == Operation::SolveAllOnly || op == Operation::SolveShots)
     {
         for (int counter = start; counter <= 25; ++counter)
         {
