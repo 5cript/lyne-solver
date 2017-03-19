@@ -1,0 +1,10 @@
+bin/*
+obj/*
+*.depend
+*build_log.html
+*.layout
+*.save-failed
+*.png
+*.lyne
+Stats.txt
+Analysis.psd

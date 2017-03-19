@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="LYNE_Hack" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/LYNE_Hack" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/LYNE_Hack" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="D:/Development/src/SimpleJSON" />
+		</Compiler>
+		<Linker>
+			<Add option="-lgdi32" />
+			<Add option="-lopencv_core" />
+			<Add option="-lopencv_highgui" />
+			<Add option="-lopencv_ml" />
+			<Add option="-lopencv_video" />
+			<Add option="-lopencv_imgproc" />
+			<Add option="-lboost_system-mt" />
+			<Add option="-lboost_filesystem-mt" />
+		</Linker>
+		<Unit filename="../SimpleJSON/parse/jsd.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_array.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_atomic.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_check.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_container.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_convenience.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_core.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_fundamental.cpp" />
+		<Unit filename="../SimpleJSON/parse/jsd_fundamental.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_fusion_adapted_struct.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_generic_parser.cpp" />
+		<Unit filename="../SimpleJSON/parse/jsd_generic_parser.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_map.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_object.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_options.cpp" />
+		<Unit filename="../SimpleJSON/parse/jsd_options.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_pair.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_set.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_string.cpp" />
+		<Unit filename="../SimpleJSON/parse/jsd_string.h" />
+		<Unit filename="../SimpleJSON/parse/jsd_unique_ptr.h" />
+		<Unit filename="../SimpleJSON/stringify/container_traits.h" />
+		<Unit filename="../SimpleJSON/stringify/integer_of_size.h" />
+		<Unit filename="../SimpleJSON/stringify/iterator_traits.h" />
+		<Unit filename="../SimpleJSON/stringify/jss.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_array.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_atomic.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_beautify.cpp" />
+		<Unit filename="../SimpleJSON/stringify/jss_beautify.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_bidirectional.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_bitset.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_check.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_container.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_convenience.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_core.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_deque.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_error.cpp" />
+		<Unit filename="../SimpleJSON/stringify/jss_error.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_extended.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_forward.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_forward_list.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_fundamental.cpp" />
+		<Unit filename="../SimpleJSON/stringify/jss_fundamental.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_fusion_adapted_struct.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_fusion_vector.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_initializer_list.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_iterator.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_list.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_map.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_mutex.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_object.cpp" />
+		<Unit filename="../SimpleJSON/stringify/jss_object.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_options.cpp" />
+		<Unit filename="../SimpleJSON/stringify/jss_options.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_pair.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_pointer.cpp" />
+		<Unit filename="../SimpleJSON/stringify/jss_pointer.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_queue.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_random_access.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_set.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_shared_ptr.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_smart_ptr.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_stack.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_string.cpp" />
+		<Unit filename="../SimpleJSON/stringify/jss_string.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_struct.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_tuple.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_undefine.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_unique_ptr.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_valarray.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_vector.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_void.cpp" />
+		<Unit filename="../SimpleJSON/stringify/jss_void.h" />
+		<Unit filename="../SimpleJSON/stringify/jss_weak_ptr.h" />
+		<Unit filename="../SimpleJSON/test.h" />
+		<Unit filename="../SimpleJSON/utility/base64.cpp" />
+		<Unit filename="../SimpleJSON/utility/base64.h" />
+		<Unit filename="capture_window.cpp" />
+		<Unit filename="capture_window.h" />
+		<Unit filename="lyne_graph_generator.cpp" />
+		<Unit filename="lyne_graph_generator.h" />
+		<Unit filename="lyne_solver.cpp" />
+		<Unit filename="lyne_solver.h" />
+		<Unit filename="magic_mouse.cpp" />
+		<Unit filename="magic_mouse.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="matrix_cursor.cpp" />
+		<Unit filename="matrix_cursor.h" />
+		<Unit filename="neural.h" />
+		<Unit filename="neural_helpers.h" />
+		<Unit filename="node.cpp" />
+		<Unit filename="node.h" />
+		<Unit filename="node_matrix.cpp" />
+		<Unit filename="node_matrix.h" />
+		<Unit filename="path.h" />
+		<Unit filename="recognition.cpp" />
+		<Unit filename="recognition.h" />
+		<Unit filename="shape.cpp" />
+		<Unit filename="shape.h" />
+		<Unit filename="solution_io.cpp" />
+		<Unit filename="solution_io.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
