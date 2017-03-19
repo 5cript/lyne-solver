@@ -21,14 +21,21 @@ const double numberDotRatio = 0.16;
 
 LYNEGenerator::LYNEGenerator()
 {
+#ifdef _WIN32
     auto hwnd = FindWindow("UnityWndClass", "LYNE");
     original_ = capture_window(hwnd);
     cv::imwrite("./captured.png", original_);
 
     if( !original_.data )
         throw std::runtime_error("Could not find LYNE window or render it");
+#endif
 
     crop(original_);
+}
+
+LYNEGenerator::LYNEGenerator(std::istream input)
+{
+
 }
 
 void LYNEGenerator::showProcessed()

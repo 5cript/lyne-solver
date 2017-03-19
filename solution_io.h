@@ -2,10 +2,10 @@
 #define SOLUTION_IO_H_INCLUDED
 
 #ifndef Q_MOC_RUN // A Qt workaround, for those of you who use Qt
-#   include "parse/jsd.h"
-#   include "parse/jsd_convenience.h"
-#   include "stringify/jss.h"
-#   include "stringify/jss_fusion_adapted_struct.h"
+#   include "SimpleJSON/parse/jsd.hpp"
+#   include "SimpleJSON/parse/jsd_convenience.hpp"
+#   include "SimpleJSON/stringify/jss.hpp"
+#   include "SimpleJSON/stringify/jss_fusion_adapted_struct.hpp"
 #endif
 
 #include <string>
@@ -15,8 +15,8 @@
 
 #include "path.h"
 
-struct Point : public JSON::FusionStruct <Point>
-             , public JSON::ParsableStruct <Point>
+struct Point : public JSON::Stringifiable <Point>
+             , public JSON::Parsable <Point>
 {
     int x;
     int y;
@@ -31,8 +31,8 @@ BOOST_FUSION_ADAPT_STRUCT
     (int, y)
 )
 
-struct Resolution : public JSON::FusionStruct <Resolution>
-                  , public JSON::ParsableStruct <Resolution>
+struct Resolution : public JSON::Stringifiable <Resolution>
+                  , public JSON::Parsable <Resolution>
 {
     int width;
     int height;
@@ -47,8 +47,8 @@ BOOST_FUSION_ADAPT_STRUCT
     (int, height)
 )
 
-struct Head : public JSON::FusionStruct <Head>
-            , public JSON::ParsableStruct <Head>
+struct Head : public JSON::Stringifiable <Head>
+            , public JSON::Parsable <Head>
 {
     Resolution resolution;
     long long backtracks;
@@ -63,8 +63,8 @@ BOOST_FUSION_ADAPT_STRUCT
     (long long, steps)
 )
 
-struct Solution : public JSON::FusionStruct <Solution>
-                , public JSON::ParsableStruct <Solution>
+struct Solution : public JSON::Stringifiable <Solution>
+                , public JSON::Parsable <Solution>
 {
     Head head;
     std::vector <std::vector <Point> > paths;

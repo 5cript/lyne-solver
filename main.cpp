@@ -2,6 +2,7 @@
 #include "lyne_solver.h"
 #include "magic_mouse.h"
 #include "solution_io.h"
+#include "capture_window.h"
 
 #include "neural_helpers.h"
 
@@ -33,7 +34,8 @@ void dumpPaths (fs::path where, std::vector <NodePath> const& paths, std::pair <
 
 int main( int argc, char** argv )
 {
-    auto hwnd = FindWindow("UnityWndClass", "LYNE");
+#if _WIN32
+    auto hwnd = window_by_name("UnityWndClass", "LYNE");
     if (hwnd == 0)
     {
         std::cout << "Please start LYNE or unminimize it";
@@ -50,7 +52,7 @@ int main( int argc, char** argv )
     std::getline (std::cin, execGenOpt);
     op = (Operation)std::stoi(execGenOpt);
 
-    system("cls");
+    clrscr();
 
     bool wait = false;
     if (op != Operation::SolveAllOnly)
@@ -73,14 +75,7 @@ int main( int argc, char** argv )
     std::cin >> start;
     std::cin.get();
 
-    RECT size;
-    GetWindowRect(hwnd, &size);
-
-    WindowBorder border;
-    std::pair <int, int> res = {
-        size.right - size.left - 2 * border.barWidth,
-        size.bottom - size.top - border.titleBarHeight - border.barWidth
-    };
+    auto res = getResolution(hwnd);
 
     std::vector <NodeMatrix> matrices;
 
@@ -94,7 +89,7 @@ int main( int argc, char** argv )
                 Sleep(1000);
             }
         }
-        system("cls");
+        clrscr();
 
         switch (op)
         {
@@ -209,6 +204,9 @@ int main( int argc, char** argv )
             dumpPaths (filePath, paths, res, stepCounter, backtrackCounter);
         }
     }
+#else
+
+#endif
 
     return 0;
 }

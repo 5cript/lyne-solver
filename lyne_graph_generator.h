@@ -10,6 +10,7 @@ class LYNEGenerator
 {
 public:
     LYNEGenerator();
+    LYNEGenerator(std::istream input);
     void showProcessed();
     void showOriginal();
     void saveProcessed();

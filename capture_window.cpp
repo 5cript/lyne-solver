@@ -1,7 +1,33 @@
 #include "capture_window.h"
+#include "magic_mouse.h"
 #include <opencv2/imgproc/imgproc.hpp>
 
 using namespace cv;
+
+#ifdef _WIN32
+std::pair <int, int> getResolution(HWND window)
+{
+    RECT size;
+    GetWindowRect(window, &size);
+
+    WindowBorder border;
+    std::pair <int, int> res = {
+        size.right - size.left - 2 * border.barWidth,
+        size.bottom - size.top - border.titleBarHeight - border.barWidth
+    };
+
+    return res;
+}
+
+void clrscr()
+{
+    system("cls");
+}
+
+HWND window_by_name(const char* class_name, const char* title_bar)
+{
+    return FindWindow(class_name, title_bar);
+}
 
 cv::Mat capture_window(HWND hwnd, int newWidth, int newHeight)
 {
@@ -61,3 +87,9 @@ cv::Mat capture_window(HWND hwnd, int newWidth, int newHeight)
 
     return src;
 }
+#else
+void clrscr()
+{
+    system("clear");
+}
+#endif
